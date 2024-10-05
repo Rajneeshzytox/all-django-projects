@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View data</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            text-wrap: nowrap;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 50px;
+            background-color: #ddd;
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            font-size: 1rem;
+
+        }
+
+
+        table tr:nth-of-type(2n){
+            background-color: #fff;
+        }
+        table tr:first-child{
+            background-color: transparent;
+        }
+        table tr th{
+            text-transform: capitalize ;
+            padding: 20px 20px;
+            text-align: left;
+        }
+        table tr td{
+            padding: 5px 10px;
+            text-align: left;
+        }
+        .table-wrapper{
+            overflow-x: scroll;
+            max-width: 90%;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>View Data</h1>
+    <div class="table-wrapper">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Roll No</th>
+                <th>Gender</th>
+                <th>Class</th>
+                <th>DOB</th>
+                <th>Date Of Entry</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            {% for student in students %}
+            <tr>
+                <td>{{student.stu_name}}</td>
+                <td>{{student.roll_no}}</td>
+                <td>{{student.gender}}</td>
+                <td>{{student.stu_class}}</td>
+                <td>{{student.dob}}</td>
+                <td>{{student.date_of_entry}}</td>
+                <td><a href="/update/{{student.id}}">📝</a></td>
+                <td><a href="/delete/{{student.id}}">🔪</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <a href="/">go back</a>
+</body>
+</html>

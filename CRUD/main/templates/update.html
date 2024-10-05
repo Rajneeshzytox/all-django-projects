@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update {{user.stu_name}}</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #ddd;
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            font-size: 1rem;
+            gap: 50px;
+        }
+
+        form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+        }
+        table tr th,td{
+            padding: 0.1rem 2rem;
+            text-align: left;
+        }
+
+        input, button, select{
+        padding: 0.5rem 1rem;
+        outline: none;
+        border-radius: 5px;
+        border: none;
+        background-color: #fff;
+        margin: 5px 0 ;
+        &::placeholder{
+            text-transform: capitalize;
+        }
+      }
+      button{
+        background-color: #333;
+        color: #eee;
+        width: fit-content;
+        height: fit-content;
+      }
+
+
+    </style>
+</head>
+<body>
+    <h1>Update {{user.stu_name}} </h1>
+    <form action="/update/{{user.id}}" method="POST">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>Label</th>
+                <th>Old Value</th>
+                <th>New Value</th>
+            </tr>
+            <tr>
+                <td>Student name</td>
+                <td>{{user.stu_name}}</td>
+                <td><input type="text" name="stu_name" value="{{user.stu_name}}" placeholder="Student name"></td>
+            </tr>
+            <tr>
+                <td>Roll No</td>
+                <td>{{user.roll_no}}</td>
+                <td><input type="number" name="roll_no" placeholder="Roll No" value="{{user.roll_no}}"></td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>{{user.gender}}</td>
+                <td>
+                    {% if user.gender == 'male' %}
+                        Male: <input type="radio" name="gender" value="male" checked/>
+                        Female: <input type="radio" name="gender" value="female"/>
+                    {%else%}
+                        Male: <input type="radio" name="gender" value="male" />
+                        Female: <input type="radio" name="gender" value="female" checked/>
+                    {% endif %}
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>Student Class</td>
+                <td>{{user.stu_class}}</td>
+                <td>
+                    <select name="stu_class" >
+                        <option value="class 6">Class 6</option>
+                        <option value="class 7">Class 7</option>
+                        <option value="class 8">Class 8</option>
+                        <option value="class 9">Class 9</option>
+                        <option value="class 10">Class 10</option>
+                        <option value="class 11">Class 11</option>
+                        <option value="class 12">Class 12</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Date Of Birth</td>
+                <td>{{user.dob}}</td>
+                <td><input type="text" name="dob" placeholder="YYYY-MM-DD" required></td>
+            </tr>
+        </table>
+        <button type="submit">Update</button>
+    </form>
+
+    <a href="/view-data">Go Back</a>
+
+    <script type="module">
+        const select = document.querySelector('select')
+        select.value = '{{user.stu_class}}'
+
+    </script>
+</body>
+</html>
