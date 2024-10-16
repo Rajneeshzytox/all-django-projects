@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    login
+    {% if messages %}
+    {% for message in messages %}
+        <p  
+            style="
+                {% if message.tags == 'error' %}
+                        background-color:  hsl(00, 60%, 50%);
+                {% elif message.tags == 'success' %}
+                        background-color:  hsl(110, 60%, 50%);
+                {% endif %}
+                    color: hsl(0,50%,98%);
+                    width: 80%;
+                    padding: 0.5rem 1rem;
+                    border-radius: 10px;
+                " >
+            {{message}}
+        </p>
+    {% endfor %}
+{% endif %}
+    <form method="post" action="/auth_practice/login/">
+        {% csrf_token %}
+        <label for="username">
+            <input id="username" type="text" name="username" placeholder="username" />
+        </label>
+        <label for="password">
+            <input id="password" type="password" name="password" placeholder="password" />
+        </label>
+
+        <input type="submit" value="submit" />
+    </form>
+    <a href="/auth_practice/registration/">registration</a>
+</body>
+</html>
